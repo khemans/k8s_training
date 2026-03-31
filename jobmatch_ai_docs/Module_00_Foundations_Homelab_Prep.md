@@ -48,23 +48,72 @@
 
   - (Optional) Turn this VM into a **template** for easy cloning (or use linked clones/snapshots).
 
-#### 0.3 – Developer workstation setup (Windows)
+#### 0.3 – Developer workstation setup (Windows + Docker Desktop)
 
-- Install **kubectl**:
-  - Download from Kubernetes releases or via a package manager (e.g. Chocolatey).
-  - Verify:
+You can keep your developer tooling inside a Docker container so your host stays clean while still editing files from Windows.
 
-    ```powershell
-    kubectl version --client
+##### Option A (recommended): Containerized CLI workstation
+
+- Prereqs on Windows:
+  - Install **Docker Desktop** and ensure Linux containers are enabled.
+  - Keep **Cursor** on Windows for editing.
+  - Ensure your project folder exists (for example `e:\working`).
+
+- Pull a base image and start a reusable shell container:
+
+  ```powershell
+  docker pull ubuntu:22.04
+  docker run --name k8s-dev -it --rm `
+    -v e:\working:/workspace `
+    -v $env:USERPROFILE\.kube:/root/.kube `
+    -w /workspace `
+    ubuntu:22.04 bash
+  ```
+
+- Inside the container, install core tooling:
+
+  ```bash
+  apt-get update && apt-get install -y curl git ca-certificates
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+  kubectl version --client
+  git --version
+  ```
+
+- Optional tools inside the same container:
+  - **helm**:
+
+    ```bash
+    curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+    helm version
     ```
 
-- Install **git** (if not already installed).
-- Ensure you have:
-  - **Windows Terminal** (or equivalent).
-  - **Cursor** as your main editor.
-- (Optional, but will be needed later):
-  - Install **helm**.
-  - Install **flux** CLI.
+  - **flux** CLI:
+
+    ```bash
+    curl -s https://fluxcd.io/install.sh | bash
+    flux --version
+    ```
+
+- Verify kube access from container:
+
+  ```bash
+  kubectl config get-contexts
+  kubectl get nodes
+  ```
+
+If `kubectl get nodes` fails, check that your kubeconfig in `C:\Users\<you>\.kube\config` points to a reachable cluster IP (not localhost from inside the container).
+
+##### Option B: Native tools on Windows (simpler, less isolated)
+
+- Install **kubectl** (Kubernetes releases or Chocolatey) and verify:
+
+  ```powershell
+  kubectl version --client
+  ```
+
+- Install **git** if needed.
+- Optional: install **helm** and **flux** CLI directly on Windows.
 
 #### 0.4 – Create a Git repository for GitOps config
 
@@ -94,6 +143,6 @@ Later, you will push this repo to GitHub or GitLab so Flux can read from it.
 
 - [ ] ESXi host is reachable from your workstation and you can log in.
 - [ ] At least one Ubuntu VM (or template) exists and is reachable via SSH.
-- [ ] `kubectl` and `git` are installed and working on Windows.
+- [ ] `kubectl` and `git` are installed and working (either in your Docker workstation container or natively on Windows).
 - [ ] A local Git repo for cluster configuration (`k8s_gitops` or similar) is initialized.
 
