@@ -1,6 +1,6 @@
 ## Module 1 – Single-Node k3s Cluster on ESXi
 
-**Goal:** Deploy a single-node **k3s** cluster in a VM and connect to it from your Windows workstation.
+**Goal:** Deploy a single-node **k3s** cluster in a VM and connect to it from your Windows workstation (or your Docker-based `k8s-dev` shell).
 
 ---
 
@@ -53,7 +53,7 @@
 
 - You should see `k3s-master-01` in state `Ready`.
 
-#### 1.3 – Set up `kubectl` on Windows
+#### 1.3 – Set up `kubectl` on Windows (and Docker dev shell)
 
 - On the k3s node:
 
@@ -68,7 +68,7 @@
   ```
 
 - Edit that file and replace any `127.0.0.1` references with the **LAN IP** of `k3s-master-01`.
-- In a PowerShell window:
+- In a PowerShell window (native use) or your Docker `k8s-dev` container (with `C:\Users\<you>\.kube` mounted to `/root/.kube` as in Module 0):
 
   ```powershell
   $env:KUBECONFIG="$HOME\.kube\config-k3s"
@@ -106,7 +106,7 @@ You should see the default nginx welcome page.
 
 ### Completion Checklist
 
-- [ ] `kubectl get nodes` works from Windows and shows `k3s-master-01` as `Ready`.
+- [ ] `kubectl get nodes` works from your workstation (Windows or Docker `k8s-dev` shell) and shows `k3s-master-01` as `Ready`.
 - [ ] You deployed an nginx Deployment and exposed it via a Service.
 - [ ] You reached nginx from your browser using `kubectl port-forward`.
 

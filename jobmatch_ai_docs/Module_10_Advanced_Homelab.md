@@ -31,7 +31,7 @@
 
 - On each worker VM, install `k3s agent` and join it to the server using the token and server URL from the master node.
 
-- Verify:
+- Verify from your usual shell:
 
   ```bash
   kubectl get nodes

@@ -31,7 +31,7 @@
 
 #### 2.1 – Create a `jobmatch` namespace
 
-- From your workstation:
+- From your workstation (either a native PowerShell session or inside the Docker `k8s-dev` container described in Module 0):
 
   ```bash
   kubectl create namespace jobmatch
@@ -42,14 +42,14 @@
 
 #### 2.2 – Manifest-driven nginx deployment
 
-- On your Windows machine, create a directory for this module, for example:
+- On your Windows machine (editing with Cursor) create a directory for this module, for example:
 
   ```text
   e:\working\k8s_training\labs\module02
   ```
 
 - In that folder, create a `deployment.yaml` for nginx in the `jobmatch` namespace, and a `service.yaml` for a ClusterIP Service.
-- Apply them:
+- Apply them from your workstation (native or `k8s-dev` shell):
 
   ```bash
   kubectl apply -f deployment.yaml
@@ -67,7 +67,7 @@ to inspect details.
 
 #### 2.3 – Ingress via Traefik
 
-- Check for the IngressController:
+- Check for the IngressController from your workstation shell:
 
   ```bash
   kubectl get pods -n kube-system

@@ -22,7 +22,7 @@
 
 #### 8.1 – Troubleshooting with `kubectl`
 
-- Practice basic troubleshooting commands on your `jobmatch` namespace:
+- Practice basic troubleshooting commands on your `jobmatch` namespace from your usual shell (Windows or Docker `k8s-dev`):
 
   ```bash
   kubectl -n jobmatch get pods

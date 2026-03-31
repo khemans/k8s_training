@@ -27,7 +27,7 @@
   - If you own a domain: `jobmatch.<your-domain>`.
 
 - For local-only setup:
-  - On Windows, map hostname(s) to the k3s master IP in the hosts file.
+  - On Windows, map hostname(s) to the k3s master IP in the hosts file (this works regardless of whether you run `kubectl` natively or from the Docker `k8s-dev` container).
 
 #### 7.2 – Install cert-manager
 

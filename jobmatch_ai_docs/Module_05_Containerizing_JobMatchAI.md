@@ -49,7 +49,7 @@
       - API service.
       - ARQ worker service.
 
-- Build and test locally (either on your Windows machine with Docker Desktop or on a Linux VM):
+- Build and test locally (either on your Windows machine with Docker Desktop, inside your `k8s-dev` container, or on a Linux VM):
 
   ```bash
   docker build -t jobmatch-frontend:dev ./frontend

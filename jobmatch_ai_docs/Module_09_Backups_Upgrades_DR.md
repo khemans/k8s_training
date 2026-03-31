@@ -56,7 +56,7 @@
   - Update the k3s install script or package as required.
   - Restart the k3s service.
 
-- Validate:
+- Validate from your workstation shell:
 
   ```bash
   kubectl get nodes

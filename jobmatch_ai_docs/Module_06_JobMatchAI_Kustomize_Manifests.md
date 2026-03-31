@@ -92,7 +92,7 @@ apps/
 
 #### 6.3 – Local dev deployment (manual apply)
 
-- For the first run, apply dev overlay directly:
+- For the first run, apply the dev overlay directly from your workstation shell (either native or the Docker `k8s-dev` container with your GitOps repo mounted):
 
   ```bash
   kubectl apply -k apps/jobmatch/overlays/dev

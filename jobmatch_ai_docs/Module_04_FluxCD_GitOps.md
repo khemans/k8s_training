@@ -20,8 +20,10 @@
 
 #### 4.1 – Install Flux CLI
 
-- On Windows, install the Flux CLI (e.g. via Chocolatey or manual download).
-- Verify:
+- Install the Flux CLI either:
+  - **Inside your Docker `k8s-dev` container** (recommended, alongside `kubectl`), or
+  - Natively on Windows (e.g. via Chocolatey or manual download).
+- Verify from whichever shell you’re using:
 
   ```bash
   flux --version

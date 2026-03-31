@@ -66,7 +66,7 @@ apps/
 
 #### 3.4 – Applying with Kustomize
 
-- From the root of your GitOps repo:
+- From the root of your GitOps repo (in a terminal on Windows or in your Docker `k8s-dev` container with `e:\working` mounted to `/workspace`):
 
   ```bash
   kubectl apply -k apps/nginx-demo/overlays/dev
